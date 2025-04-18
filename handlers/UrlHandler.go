@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-const baseUrl = "https://loacalhost:8080/"
+const baseUrl = "https://loacalhost:8081/"
 
 func ShortenUrlHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
