@@ -5,10 +5,11 @@ import (
 	"UrlShortner/models"
 	"UrlShortner/utils"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
-const baseUrl = "https://loacalhost:8081/"
+const baseUrl = "http://localhost:8081/"
 
 func ShortenUrlHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -25,8 +26,9 @@ func ShortenUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	key := utils.GenerateKey(6)
 	err = database.SaveUrl(key, req.URL)
+	fmt.Println(err)
 	if err != nil {
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		http.Error(w, "Internal server errorc", http.StatusInternalServerError)
 		return
 	}
 
@@ -49,9 +51,11 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 
 	originalUrl, err := database.GetUrl(key)
 	if err != nil {
-		http.Error(w, "Url not found", http.StatusNotFound)
+		http.Error(w, "Url not found x", http.StatusNotFound)
 		return
 	}
 
+	fmt.Println("OriginalUrl:", originalUrl)
+	fmt.Println(err)
 	http.Redirect(w, r, originalUrl, http.StatusFound)
 }
