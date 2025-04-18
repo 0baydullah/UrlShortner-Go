@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"UrlShortner/utils"
-	"net/http"
-	"encoding/json"
 	"UrlShortner/database"
 	"UrlShortner/models"
+	"UrlShortner/utils"
+	"encoding/json"
+	"net/http"
 )
 
 const baseUrl = "https://loacalhost:8080/"

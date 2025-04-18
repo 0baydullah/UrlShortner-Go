@@ -1,14 +1,22 @@
 package main
 
 import (
-	"fmt"
+	"UrlShortner/config"
+	"UrlShortner/handlers"
+	"log"
+	"net/http"
 )
 
 func main() {
-	s := "gopher"
-	fmt.Println("Hello and welcome, %s!", s)
+	config.InitDB()
 
-	for i := 1; i <= 5; i++ {
-		fmt.Println("i =", 100/i)
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal(err)
+		return
 	}
+	log.Println("Listening on port 8080")
+
+	http.HandleFunc("/shorten", handlers.ShortenUrlHandler)
+	http.HandleFunc("/", handlers.RedirectHandler)
 }
